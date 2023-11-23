@@ -51,6 +51,9 @@ coverage-xml="coverage xml --rcfile setup.cfg"
 coverage-report="coverage report --rcfile setup.cfg"
 coverage = {composite=["coverage-pytest", "coverage-html", "coverage-xml", "coverage-report"]}
 
+[tool.pdm.scripts.f]
+call = "src.cbs_service.service:func"
+
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
