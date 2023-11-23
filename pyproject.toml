@@ -1,0 +1,58 @@
+[project]
+name = "cbs_service"
+version = "0.1.0"
+description = ""
+authors = [{name = "André Graça", email = "andre.graca@eu.clara.net"}]
+
+dependencies = [
+    "claranet-billing-common @ git+ssh://git@git.eu.clara.net/billing-system/lib-common.git@dev",
+    "claranet-billing-orm @ git+ssh://git@git.eu.clara.net/billing-system/orm.git@dev"]
+
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "flake8>=6.1.0",
+    "autoflake>=2.2.1",
+    "black>=23.11.0",
+    "isort>=5.12.0",
+    "coverage>=7.3.2",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm.scripts]
+install_hooks = {composite=["pre-commit install", "pre-commit install --hook-type pre-push"]}
+clean = 'rm -rf .cache __pycache__ .pytest_cache *coverage* .ipynb_checkpoints build dist *.egg-info'
+
+# Linting
+lint-black="black --check ."
+lint-isort="isort --settings-path setup.cfg --check-only ."
+lint-autoflake="autoflake --config setup.cfg --check ."
+lint-flake8="flake8 --config setup.cfg ."
+lint = {composite=[
+    "lint-black", 
+    "lint-isort", 
+    "lint-autoflake", 
+    "lint-flake8",
+    ]}
+
+lint-fix-black="black ."
+lint-fix-isort="isort --settings-path setup.cfg ."
+lint-fix-autoflake="autoflake --config setup.cfg ."
+lint-fix-flake8="flake8 --config setup.cfg ."
+lint-fix = {composite=["lint-black", "lint-isort", "lint-autoflake", "lint-flake8"]}
+
+# Tests + Coverage
+test = "python -m pytest -vvv"
+coverage-pytest="coverage run --rcfile setup.cfg -m pytest -qqq"
+coverage-html="coverage html --rcfile setup.cfg"
+coverage-xml="coverage xml --rcfile setup.cfg"
+coverage-report="coverage report --rcfile setup.cfg"
+coverage = {composite=["coverage-pytest", "coverage-html", "coverage-xml", "coverage-report"]}
+
