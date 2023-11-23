@@ -6,6 +6,10 @@
 pdm add "git+ssh://git@git.eu.clara.net/billing-system/orm.git@dev#egg=claranet-billing-orm"
 ```
 
+## Manage a monorepo
+
+<https://pdm-project.org/latest/usage/advanced/#use-pdm-to-manage-a-monorepo>
+
 ## Build docker example
 
 ```dockerfile

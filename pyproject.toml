@@ -5,9 +5,8 @@ description = ""
 authors = [{name = "André Graça", email = "andre.graca@eu.clara.net"}]
 
 dependencies = [
-    "claranet-billing-common @ git+ssh://git@git.eu.clara.net/billing-system/lib-common.git@dev",
-    "claranet-billing-orm @ git+ssh://git@git.eu.clara.net/billing-system/orm.git@dev"]
-
+    "requests>=2.31.0",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
@@ -19,15 +18,11 @@ dev = [
     "black>=23.11.0",
     "isort>=5.12.0",
     "coverage>=7.3.2",
+    "pre-commit>=3.5.0",
 ]
 
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
-
 [tool.pdm.scripts]
-install_hooks = {composite=["pre-commit install", "pre-commit install --hook-type pre-push"]}
+install-hooks = {composite=["pre-commit install", "pre-commit install --hook-type pre-push"]}
 clean = 'rm -rf .cache __pycache__ .pytest_cache *coverage* .ipynb_checkpoints build dist *.egg-info'
 
 # Linting
@@ -55,4 +50,9 @@ coverage-html="coverage html --rcfile setup.cfg"
 coverage-xml="coverage xml --rcfile setup.cfg"
 coverage-report="coverage report --rcfile setup.cfg"
 coverage = {composite=["coverage-pytest", "coverage-html", "coverage-xml", "coverage-report"]}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
 
