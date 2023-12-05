@@ -1,5 +1,8 @@
 # PDM Help
 
+![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAndreGraca98%2Fcbs_service%2Fdev%2Fpyproject.toml&query=%24.project%5B%22version%22%5D)
+
+
 ## Add git repos
 
 ```bash
